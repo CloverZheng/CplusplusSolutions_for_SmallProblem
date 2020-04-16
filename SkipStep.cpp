@@ -1,8 +1,10 @@
 /*
 一只青蛙一次可以跳上1级台阶，也可以跳上2级。
 求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。
-以下是非递归求法，用到排列组合。
 */
+
+//以下是非递归求法，用到排列组合。
+
 class Solution {
 public:
     //排列组合
@@ -35,5 +37,22 @@ public:
             total+=Cnm(number-i,i);
         }
         return total;
+    }
+};
+
+
+//以下是递归求法
+class Solution {
+public:
+    int last_1=0,last_2=1,result=0;
+    int jumpFloor(int number) {
+        if(number==0) return result;
+        else {
+            result=last_1+last_2;
+            last_1=last_2;
+            last_2=result;
+        }
+        jumpFloor(--number);
+        return result;
     }
 };
